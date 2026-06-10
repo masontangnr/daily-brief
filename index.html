@@ -488,6 +488,28 @@
         background: var(--orange);
         color: var(--white);
       }
+      #fullscreen-btn {
+        background: none;
+        border: 2px solid var(--orange);
+        color: var(--orange);
+        width: 2.1rem;
+        height: 2.1rem;
+        cursor: pointer;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s, color 0.15s;
+        margin-left: 0.4rem;
+      }
+      #fullscreen-btn:hover {
+        background: var(--orange);
+        color: var(--white);
+      }
+      :fullscreen #fullscreen-btn,
+      :-webkit-full-screen #fullscreen-btn {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -1065,6 +1087,7 @@ type: weekly-note
       <button class="nav-btn" id="prev">&#8592;</button>
       <span id="counter">1 / 14</span>
       <button class="nav-btn" id="next">&#8594;</button>
+      <button id="fullscreen-btn" title="Enter fullscreen">&#x26F6;</button>
     </nav>
 
     <script>
@@ -1101,6 +1124,12 @@ type: weekly-note
       });
 
       goTo(0);
+
+      document.getElementById("fullscreen-btn").addEventListener("click", () => {
+        const el = document.documentElement;
+        if (el.requestFullscreen) el.requestFullscreen();
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      });
     </script>
   </body>
 </html>
