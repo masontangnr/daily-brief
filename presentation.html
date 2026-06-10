@@ -620,11 +620,11 @@
         <p class="fitem">
           <b>TaskNote Plugin</b> — all-in-one task management inside Obsidian
         </p>
-        <p class="fitem indent">Calendar view for scheduling and planning</p>
-        <p class="fitem indent">Kanban board for visual project tracking</p>
-        <p class="fitem indent">
-          Create tasks to be put into Calendar and Kanban views
-        </p>
+        <ul style="list-style: disc; padding-left: 2.4rem; margin-top: 0.3rem; display: flex; flex-direction: column; gap: 0.3rem;">
+          <li class="fitem">Calendar view for scheduling and planning</li>
+          <li class="fitem">Kanban board for visual project tracking</li>
+          <li class="fitem">Create tasks to be put into Calendar and Kanban views</li>
+        </ul>
       </div>
       <p class="maxim mt3">Your notes, your system, your files.</p>
     </div>
@@ -641,18 +641,15 @@
         Claude Cowork is an AI desktop app that reads and writes files directly
         on your machine and runs on a schedule you set, automatically.
       </p>
-      <div class="flist mt2">
-        <p class="fitem">
+      <ul class="flist mt2" style="list-style: disc; padding-left: 1.4rem;">
+        <li class="fitem">
           Scheduled automations — run once or on a recurring schedule
-        </p>
-        <p class="fitem">Creates and edits files locally on your computer</p>
-        <p class="fitem">
+        </li>
+        <li class="fitem">Creates and edits files locally on your computer</li>
+        <li class="fitem">
           Generates daily briefs, weekly briefs, and review reports
-        </p>
-        <p class="fitem">
-          Automates file organization and spreadsheet creation
-        </p>
-      </div>
+        </li>
+      </ul>
       <p class="maxim mt3">Schedule it once. Let it run.</p>
     </div>
 
@@ -661,7 +658,7 @@
 ═══════════════════════════════════════ -->
     <div class="slide slide--cream" id="s7">
       <div class="prefix">
-        <span class="n">05.</span><span class="t">System Architecture</span>
+        <span class="t">System Architecture</span>
       </div>
       <div class="diagram">
         <!-- Source -->
@@ -679,7 +676,7 @@
             <div class="dbox">
               <span class="dbox-lbl">01.</span>
               <div class="dbox-title">Daily Brief</div>
-              <div class="dbox-detail">Every day &nbsp;·&nbsp; 6:00 AM</div>
+              <div class="dbox-detail">Every day &nbsp;·&nbsp; 7:00 AM</div>
               <div class="dbox-path">Claude/daily/</div>
             </div>
           </div>
@@ -697,7 +694,7 @@
             <div class="dbox">
               <span class="dbox-lbl">03.</span>
               <div class="dbox-title">Weekly Review</div>
-              <div class="dbox-detail">Every Friday &nbsp;·&nbsp; 5:00 PM</div>
+              <div class="dbox-detail">Every Sunday &nbsp;·&nbsp; 7:00 AM</div>
               <div class="dbox-path">Claude/reviews/</div>
             </div>
           </div>
@@ -721,7 +718,7 @@
 ═══════════════════════════════════════ -->
     <div class="slide slide--cream" id="s8">
       <div class="prefix">
-        <span class="n">06.</span><span class="t">Weekly Brief</span>
+        <span class="t">Weekly Brief</span>
       </div>
       <h2 class="h1">Your Week,<br />Organized.</h2>
       <div class="grid2">
@@ -761,7 +758,7 @@
     <div class="slide slide--cream prompt-slide" id="s9">
       <div class="prompt-meta">
         <div class="prefix" style="margin-bottom: 0.25rem">
-          <span class="n">07.</span><span class="t">Weekly Brief Prompt</span>
+          <span class="t">Weekly Brief Prompt</span>
         </div>
         <p class="prompt-sub">
           Copy and paste into Claude Cowork — set a recurring Monday 6 AM
@@ -818,7 +815,7 @@ General formatting rules:
 ═══════════════════════════════════════ -->
     <div class="slide slide--cream" id="s10">
       <div class="prefix">
-        <span class="n">08.</span><span class="t">Daily Brief</span>
+       <span class="t">Daily Brief</span>
       </div>
       <h2 class="h1">Start Every Day<br />with Clarity.</h2>
       <div class="flist mt2">
@@ -851,7 +848,7 @@ General formatting rules:
     <div class="slide slide--cream prompt-slide" id="s11">
       <div class="prompt-meta">
         <div class="prefix" style="margin-bottom: 0.25rem">
-          <span class="n">09.</span><span class="t">Daily Brief Prompt</span>
+          <span class="t">Daily Brief Prompt</span>
         </div>
         <p class="prompt-sub">
           Copy and paste into Claude Cowork — set a recurring daily 6 AM
@@ -899,7 +896,7 @@ type: daily-note
 ═══════════════════════════════════════ -->
     <div class="slide slide--cream" id="s12">
       <div class="prefix">
-        <span class="n">10.</span><span class="t">Weekly Review</span>
+        <span class="t">Weekly Review</span>
       </div>
       <h2 class="h1">Close the Loop.</h2>
       <div class="grid2 mt2">
@@ -953,7 +950,7 @@ type: daily-note
     <div class="slide slide--cream prompt-slide" id="s13">
       <div class="prompt-meta">
         <div class="prefix" style="margin-bottom: 0.25rem">
-          <span class="n">11.</span><span class="t">Weekly Review Prompt</span>
+         <span class="t">Weekly Review Prompt</span>
         </div>
         <p class="prompt-sub">
           Copy and paste into Claude Cowork — set a recurring Friday 5 PM
