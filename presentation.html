@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Powered Time Management — Houston AI Club 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Raleway:wght@500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #F5F1E4;
+      --cream2:   #F1EBE3;
+      --dark:     #1B1B1B;
+      --orange:   #FB6636;
+      --secondary:#363636;
+      --white:    #FFFFFF;
+      --fd: 'Archivo Black', sans-serif;
+      --fb: 'Raleway', sans-serif;
+      --fl: 'Montserrat', sans-serif;
+    }
+
+    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--dark); }
+
+    /* ── Slides ── */
+    .slide {
+      position: fixed; inset: 0;
+      padding: 5vh 8vw;
+      display: flex; flex-direction: column; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .slide.active { opacity: 1; pointer-events: all; }
+    .slide--dark  { background: var(--dark);  color: var(--white); }
+    .slide--cream { background: var(--cream); color: var(--dark); }
+
+    /* ── Type ── */
+    .display {
+      font-family: var(--fd);
+      font-size: clamp(2.2rem, 5.2vw, 5.5rem);
+      line-height: 1.08; letter-spacing: 0.03em; text-transform: uppercase;
+    }
+    .h1 {
+      font-family: var(--fd);
+      font-size: clamp(1.6rem, 3.2vw, 3.2rem);
+      line-height: 1.12; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .body {
+      font-family: var(--fb); font-weight: 500;
+      font-size: clamp(0.85rem, 1.15vw, 1.15rem); line-height: 1.65;
+    }
+    .label {
+      font-family: var(--fl); font-weight: 700;
+      font-size: clamp(0.65rem, 0.85vw, 0.85rem); letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .maxim {
+      font-family: var(--fb); font-weight: 600;
+      font-size: clamp(0.8rem, 1.05vw, 1.05rem);
+      color: var(--orange); letter-spacing: 0.02em;
+    }
+
+    /* ── Section prefix ── */
+    .prefix {
+      display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 1.1rem;
+    }
+    .prefix .n {
+      font-family: var(--fb); font-weight: 700;
+      color: var(--orange); text-transform: uppercase; letter-spacing: 0.08em;
+      font-size: clamp(0.95rem, 1.6vw, 1.6rem);
+    }
+    .prefix .t {
+      font-family: var(--fb); font-weight: 600;
+      color: var(--dark); text-transform: uppercase; letter-spacing: 0.08em;
+      font-size: clamp(0.95rem, 1.6vw, 1.6rem);
+    }
+    .slide--dark .prefix .t { color: var(--white); }
+
+    /* ── Spacing helpers ── */
+    .mt1 { margin-top: 0.6rem; }
+    .mt2 { margin-top: 1.2rem; }
+    .mt3 { margin-top: 2rem; }
+    .mt4 { margin-top: 3rem; }
+
+    /* ── Feature list (no bullets) ── */
+    .flist { display: flex; flex-direction: column; gap: 0.45rem; margin-top: 1rem; }
+    .fitem {
+      font-family: var(--fb); font-weight: 500;
+      font-size: clamp(0.82rem, 1.1vw, 1.1rem); line-height: 1.5;
+      color: var(--secondary);
+    }
+    .fitem b { color: var(--dark); font-weight: 700; }
+    .slide--dark .fitem   { color: rgba(255,255,255,0.8); }
+    .slide--dark .fitem b { color: var(--white); }
+    .indent { padding-left: 1.2rem; }
+
+    /* ── 2-col grid ── */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem 2.5rem; margin-top: 1.4rem; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem 1.5rem; margin-top: 1.4rem; }
+    .gi-num {
+      font-family: var(--fb); font-weight: 700; color: var(--orange);
+      font-size: clamp(1rem, 1.5vw, 1.5rem); letter-spacing: 0.05em;
+    }
+    .gi-title {
+      font-family: var(--fb); font-weight: 700;
+      font-size: clamp(0.8rem, 1.1vw, 1.1rem); text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--dark); margin-top: 0.1rem;
+    }
+    .gi-desc {
+      font-family: var(--fb); font-weight: 500;
+      font-size: clamp(0.72rem, 0.95vw, 0.95rem); color: var(--secondary);
+      margin-top: 0.25rem; line-height: 1.4;
+    }
+
+    /* ── Cover slide extras ── */
+    .cover-year {
+      font-family: var(--fl); font-weight: 700; color: var(--orange);
+      font-size: clamp(0.75rem, 1.1vw, 1.1rem); letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 1.4rem;
+    }
+    .cover-sub {
+      font-family: var(--fb); font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      font-size: clamp(0.85rem, 1.2vw, 1.2rem); margin-top: 1.1rem; letter-spacing: 0.02em;
+    }
+    .cover-presenter {
+      font-family: var(--fb); font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      font-size: clamp(0.78rem, 1vw, 1rem); margin-top: 0.4rem; letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .abs-footer {
+      position: absolute; bottom: 2.2rem; left: 8vw;
+      font-family: var(--fl); font-weight: 700;
+      color: var(--secondary); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    }
+
+    /* ── Problem slide questions ── */
+    .questions { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 2rem; }
+    .q {
+      font-family: var(--fb); font-weight: 500;
+      font-size: clamp(0.85rem, 1.2vw, 1.2rem); color: rgba(255,255,255,0.85);
+      padding-left: 1.6rem; position: relative; line-height: 1.45;
+    }
+    .q::before { content: '—'; position: absolute; left: 0; color: var(--orange); font-weight: 700; }
+
+    /* ── Architecture diagram ── */
+    .diagram { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 1.4rem; }
+    .diag-vline { width: 2px; height: 1.2rem; background: var(--orange); }
+    .diag-branch {
+      display: flex; gap: 1.8rem;
+      border-top: 2px solid var(--orange);
+    }
+    .diag-node { display: flex; flex-direction: column; align-items: center; }
+    .diag-node-vl { width: 2px; height: 1.2rem; background: var(--orange); }
+    .dbox {
+      border: 2px solid var(--orange);
+      padding: 0.55rem 1.1rem; text-align: center; background: var(--cream);
+    }
+    .dbox--src { background: var(--dark); padding: 0.5rem 3rem; }
+    .dbox--vault { background: var(--cream2); min-width: 38vw; }
+    .dbox-lbl {
+      font-family: var(--fl); font-weight: 700;
+      font-size: 0.58rem; letter-spacing: 0.14em; color: var(--orange);
+      text-transform: uppercase; display: block; margin-bottom: 0.12rem;
+    }
+    .dbox-title {
+      font-family: var(--fb); font-weight: 700;
+      font-size: clamp(0.72rem, 1.1vw, 1.1rem); text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--dark);
+    }
+    .dbox--src .dbox-title { color: var(--white); }
+    .dbox-detail {
+      font-family: var(--fb); font-weight: 500;
+      font-size: clamp(0.6rem, 0.8vw, 0.8rem); color: var(--secondary); margin-top: 0.15rem;
+    }
+    .dbox-path {
+      font-family: var(--fl); font-weight: 700;
+      font-size: 0.58rem; color: var(--orange); letter-spacing: 0.05em; margin-top: 0.15rem;
+    }
+    .vault-paths { display: flex; gap: 2rem; justify-content: center; margin-top: 0.45rem; }
+    .vpath { font-family: var(--fl); font-weight: 700; font-size: 0.6rem; color: var(--secondary); letter-spacing: 0.06em; }
+
+    /* ── Prompt slides ── */
+    .prompt-slide { justify-content: flex-start !important; padding-top: 3.5vh !important; }
+    .prompt-meta { margin-bottom: 0.6rem; }
+    .prompt-sub {
+      font-family: var(--fl); font-weight: 700;
+      font-size: 0.7rem; color: var(--secondary); letter-spacing: 0.1em; text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+    .prompt-block {
+      background: var(--dark); color: #DEDEDE;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: clamp(0.58rem, 0.78vw, 0.78rem); line-height: 1.55;
+      padding: 0.9rem 1.1rem;
+      overflow-y: auto; max-height: 64vh;
+      white-space: pre-wrap; word-break: break-word;
+      border-left: 3px solid var(--orange);
+      flex: 1; margin-top: 0.6rem;
+    }
+
+    /* ── Navigation ── */
+    #nav {
+      position: fixed; bottom: 1.4rem; right: 1.8rem; z-index: 200;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    #counter {
+      font-family: var(--fl); font-weight: 700;
+      font-size: 0.7rem; color: var(--orange); letter-spacing: 0.12em;
+      min-width: 3.5rem; text-align: center;
+    }
+    .nav-btn {
+      background: none; border: 2px solid var(--orange);
+      color: var(--orange); width: 2.1rem; height: 2.1rem;
+      cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s;
+      font-family: var(--fb); font-weight: 700;
+    }
+    .nav-btn:hover { background: var(--orange); color: var(--white); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 1 — COVER
+═══════════════════════════════════════ -->
+<div class="slide slide--dark active" id="s1">
+  <!-- <p class="cover-year">2026</p> -->
+  <h1 class="display">Build an AI-Powered<br>Time Management<br>System</h1>
+  <br>
+  <p class="cover-year">Using Claude Cowork and Obsidian</p>
+  <p class="cover-year">Mason Tang</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 2 — ABOUT ME
+═══════════════════════════════════════ -->
+<div class="slide slide--cream" id="s2">
+  <div class="prefix"><span class="n">01.</span><span class="t">About Me</span></div>
+  <h2 class="h1">Mason Tang</h2>
+  <div class="flist mt2">
+    <p class="fitem"><b>Studio Kairos</b> — Creative design studio and internship program for young professionals</p>
+    <p class="fitem"><b>Clear Lake Tutors</b> — K–12 academic tutoring serving the Clear Lake, TX area</p>
+    <p class="fitem">15 years as an educator</p>
+  </div>
+  <p class="maxim mt4">Teachers make the best builders.</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 3 — TOPIC / WHAT WE'LL COVER
+═══════════════════════════════════════ -->
+<div class="slide slide--cream" id="s3">
+  <div class="prefix"><span class="n">02.</span><span class="t">What We'll Cover</span></div>
+  <h2 class="h1">AI-Powered Planning<br>for Anyone</h2>
+  <p class="body mt1" style="color:var(--secondary)">For entrepreneurs, professionals, or anyone who wants to start each day with clarity and end each week with a real sense of what was accomplished.</p>
+  <div class="grid2">
+    <div><div class="gi-num">01.</div><div class="gi-title">Obsidian</div></div>
+    <div><div class="gi-num">02.</div><div class="gi-title">Claude Cowork</div></div>
+    <div><div class="gi-num">03.</div><div class="gi-title">Daily Briefs</div></div>
+    <div><div class="gi-num">04.</div><div class="gi-title">Weekly Briefs</div></div>
+    <div><div class="gi-num">05.</div><div class="gi-title">Weekly Review</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 4 — THE PROBLEM
+═══════════════════════════════════════ -->
+<div class="slide slide--dark" id="s4">
+  <h2 class="h1" style="color:var(--white)">Most people start<br>the week without a plan.<br><span style="color:var(--orange)">And end it without a reflection.</span></h2>
+  <div class="questions">
+    <p class="q">What tasks should I do today?</p>
+    <p class="q">What is the priority for each task?</p>
+    <p class="q">What is the time estimate for each task?</p>
+    <p class="q">When should I complete each task, and in which order?</p>
+    <p class="q">Did I use my time efficiently this week — and how can I improve?</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 5 — OBSIDIAN
+═══════════════════════════════════════ -->
+<div class="slide slide--cream" id="s5">
+  <div class="prefix"><span class="n">03.</span><span class="t">Obsidian</span></div>
+  <h2 class="h1">Free. Local.<br>Open Source.</h2>
+  <p class="body mt1" style="color:var(--secondary)">Obsidian stores all your notes as plain Markdown files on your own computer — no subscription, no cloud lock-in, just files you own forever.</p>
+  <div class="flist mt2">
+    <p class="fitem"><b>TaskNote Plugin</b> — all-in-one task management inside Obsidian</p>
+    <p class="fitem indent">Calendar view for scheduling and planning</p>
+    <p class="fitem indent">Kanban board for visual project tracking</p>
+    <p class="fitem indent">Task list with completion and priority tracking</p>
+  </div>
+  <p class="maxim mt3">Your notes, your system, your files.</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 6 — CLAUDE COWORK
+═══════════════════════════════════════ -->
+<div class="slide slide--cream" id="s6">
+  <div class="prefix"><span class="n">04.</span><span class="t">Claude Cowork</span></div>
+  <h2 class="h1">AI That Works<br>on Your Computer.</h2>
+  <p class="body mt1" style="color:var(--secondary)">Claude Cowork is an AI desktop app that reads and writes files directly on your machine — and runs on a schedule you set, automatically.</p>
+  <div class="flist mt2">
+    <p class="fitem">Scheduled automations — run once or on a recurring schedule</p>
+    <p class="fitem">Creates and edits files locally on your computer</p>
+    <p class="fitem">Generates daily briefs, weekly briefs, and review reports</p>
+    <p class="fitem">Automates file organization and spreadsheet creation</p>
+  </div>
+  <p class="maxim mt3">Schedule it once. Let it run.</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 7 — SYSTEM ARCHITECTURE
+═══════════════════════════════════════ -->
+<div class="slide slide--cream" id="s7">
+  <div class="prefix"><span class="n">05.</span><span class="t">System Architecture</span></div>
+  <div class="diagram">
+    <!-- Source -->
+    <div class="dbox dbox--src">
+      <span class="dbox-lbl">Automation Source</span>
+      <div class="dbox-title" style="color:var(--white)">Claude Cowork</div>
+    </div>
+    <div class="diag-vline"></div>
+    <!-- Three automations -->
+    <div class="diag-branch">
+      <div class="diag-node">
+        <div class="diag-node-vl"></div>
+        <div class="dbox">
+          <span class="dbox-lbl">01.</span>
+          <div class="dbox-title">Daily Brief</div>
+          <div class="dbox-detail">Every day &nbsp;·&nbsp; 6:00 AM</div>
+          <div class="dbox-path">Claude/daily/</div>
+        </div>
+      </div>
+      <div class="diag-node">
+        <div class="diag-node-vl"></div>
+        <div class="dbox">
+          <span class="dbox-lbl">02.</span>
+          <div class="dbox-title">Weekly Brief</div>
+          <div class="dbox-detail">Every Monday &nbsp;·&nbsp; 6:00 AM</div>
+          <div class="dbox-path">Claude/weekly/</div>
+        </div>
+      </div>
+      <div class="diag-node">
+        <div class="diag-node-vl"></div>
+        <div class="dbox">
+          <span class="dbox-lbl">03.</span>
+          <div class="dbox-title">Weekly Review</div>
+          <div class="dbox-detail">Every Friday &nbsp;·&nbsp; 5:00 PM</div>
+          <div class="dbox-path">Claude/reviews/</div>
+        </div>
+      </div>
+    </div>
+    <div class="diag-vline"></div>
+    <!-- Obsidian vault -->
+    <div class="dbox dbox--vault">
+      <span class="dbox-lbl">Output Destination</span>
+      <div class="dbox-title">Obsidian Vault</div>
+      <div class="vault-paths">
+        <span class="vpath">Claude/daily</span>
+        <span class="vpath">Claude/weekly</span>
+        <span class="vpath">Claude/reviews</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 8 — WEEKLY BRIEF
+═══════════════════════════════════════ -->
+<div class="slide slide--cream" id="s8">
+  <div class="prefix"><span class="n">06.</span><span class="t">Weekly Brief</span></div>
+  <h2 class="h1">Your Week,<br>Organized.</h2>
+  <div class="grid2">
+    <div>
+      <div class="gi-num">01.</div>
+      <div class="gi-title">Houston Events</div>
+      <div class="gi-desc">Tech, business, and community events happening this week</div>
+    </div>
+    <div>
+      <div class="gi-num">02.</div>
+      <div class="gi-title">Houston Weather</div>
+      <div class="gi-desc">7-day forecast for the Clear Lake area</div>
+    </div>
+    <div>
+      <div class="gi-num">03.</div>
+      <div class="gi-title">Weekly Task Review</div>
+      <div class="gi-desc">All tasks grouped by project, prioritized, and time-estimated</div>
+    </div>
+    <div>
+      <div class="gi-num">04.</div>
+      <div class="gi-title">Fast Food Deals</div>
+      <div class="gi-desc">Chain restaurant promos, app-only deals, and daily specials</div>
+    </div>
+  </div>
+  <p class="maxim mt3">Every Monday morning, automatically.</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 9 — WEEKLY BRIEF PROMPT
+═══════════════════════════════════════ -->
+<div class="slide slide--cream prompt-slide" id="s9">
+  <div class="prompt-meta">
+    <div class="prefix" style="margin-bottom:0.25rem"><span class="n">07.</span><span class="t">Weekly Brief Prompt</span></div>
+    <p class="prompt-sub">Copy and paste into Claude Cowork — set a recurring Monday 6 AM schedule</p>
+  </div>
+  <pre class="prompt-block">Generate a Weekly Brief for my Obsidian vault. Save it as a new Markdown file named `weekly-[YYYY-MM-DD].md` (using today's date) inside the `Claude/weekly` folder of my Obsidian vault. The brief should have four sections:
+
+## 1. Houston Events This Week
+Search the web for events happening in Houston this week across these categories:
+- Tech &amp; AI meetups
+- Business networking events
+- Entrepreneurship / small business workshops
+- Free online business classes or webinars
+- General things to do (festivals, food events, outdoor activities)
+List up to 40 items in a Markdown table with these columns: Event Name, Date/Time, Location, Category, and a one-sentence description. Sort by date. If a registration link is available, include it.
+
+## 2. Houston Weather This Week
+Search the web for the 7-day weather forecast for Houston, TX (Clear Lake area preferred). For each day, list:
+- High / Low temperature (°F)
+- Conditions (sunny, cloudy, rain, etc.)
+- Any severe weather alerts
+Present this as a simple Markdown table.
+
+## 3. Weekly Task Review
+Read all files in the `TaskNotes` folder of my Obsidian vault and extract any incomplete tasks (lines with `- [ ]`). Then:
+- Group tasks by project or context (Studio Kairos, Clear Lake Tutors, Personal, etc.)
+- Prioritize each task as 🔴 High, 🟡 Medium, or 🟢 Low based on deadlines and importance
+- Estimate time for each task (e.g., ~30 min, ~2 hrs)
+- For any complex or multi-step tasks, add a brief recommended approach (2–3 sentences on how to tackle it)
+Format as grouped lists under H3 subheadings per project/context.
+
+## 4. Chain Food Deals This Week
+Search the web for current chain restaurant and fast food deals, coupons, and promotions available this week. Focus on:
+- National chains with Houston locations (McDonald's, Burger King, Whataburger, Taco Bell, Chick-fil-A, Sonic, Freddy's, KFC, Blaze Pizza, Mod's Pizza, Jack in the Box, Cava, Chipotle, etc.)
+- App-only deals and loyalty program offers
+- Day-of-the-week specials (e.g., Taco Tuesday, Free Fry Friday)
+- Limited-time promotions and seasonal menu deals
+- Any notable coupon codes or promo codes
+Present this as a Markdown table with these columns: Chain, Deal, Details/Conditions, and Days Available. Sort by chain name alphabetically. Note which deals require an app or loyalty membership.
+
+---
+General formatting rules:
+- Use H2 (`##`) for each of the four main sections
+- Use Obsidian-friendly Markdown (no HTML)
+- Keep it scannable — favor tables and short bullet points over paragraphs
+- Add a YAML frontmatter block at the top with `title`, `date`, and `tags: [weekly-brief]`</pre>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 10 — DAILY BRIEF
+═══════════════════════════════════════ -->
+<div class="slide slide--cream" id="s10">
+  <div class="prefix"><span class="n">08.</span><span class="t">Daily Brief</span></div>
+  <h2 class="h1">Start Every Day<br>with Clarity.</h2>
+  <div class="flist mt2">
+    <p class="fitem"><b>01. Today's Weather</b> — current conditions so you can plan your day</p>
+    <p class="fitem"><b>02. Task Review</b> — all incomplete tasks for this week, grouped by project</p>
+    <p class="fitem"><b>03. Today's Focus</b> — AI picks your top 3–5 tasks and builds a time-blocked schedule</p>
+    <p class="fitem indent">Priority ranking for each task</p>
+    <p class="fitem indent">Suggested time blocks: morning, midday, afternoon, evening</p>
+    <p class="fitem indent">Flags blocked tasks and recommends what to defer</p>
+  </div>
+  <p class="maxim mt3">No more staring at a blank calendar.</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 11 — DAILY BRIEF PROMPT
+═══════════════════════════════════════ -->
+<div class="slide slide--cream prompt-slide" id="s11">
+  <div class="prompt-meta">
+    <div class="prefix" style="margin-bottom:0.25rem"><span class="n">09.</span><span class="t">Daily Brief Prompt</span></div>
+    <p class="prompt-sub">Copy and paste into Claude Cowork — set a recurring daily 6 AM schedule</p>
+  </div>
+  <pre class="prompt-block">Generate a Daily Brief for my Obsidian vault. Save it as a new Markdown file named `daily-[YYYY-MM-DD].md` (using today's date) inside the `Claude/daily` folder of my Obsidian vault. The brief should have three sections:
+
+## 1. Weekly Task Review
+Read all files in the `TaskNotes` folder of my Obsidian vault and extract any incomplete tasks (lines with `- [ ]`). Then:
+- Group tasks by project or context (Studio Kairos, Clear Lake Tutors, Personal, etc.)
+- Prioritize each task as 🔴 High, 🟡 Medium, or 🟢 Low based on deadlines and importance
+- Estimate time for each task (e.g., ~30 min, ~2 hrs)
+- For any complex or multi-step tasks, add a brief recommended approach (2–3 sentences on how to tackle it)
+Format as grouped lists under H3 subheadings per project/context.
+- Only include tasks for this week — not future weeks
+
+## 2. Today's Focus
+Based on the weekly task review above, build a focused daily plan for today:
+- Pick the top 3–5 tasks I should realistically tackle today, considering priority and time estimates
+- Arrange them into a suggested schedule with time blocks (morning, midday, afternoon, evening)
+- Flag any tasks that are blocked or depend on someone else
+- If the day looks overloaded, recommend what to defer and why
+Format as a numbered list with time blocks and brief reasoning for each pick.
+
+---
+General formatting rules:
+- Use H2 (`##`) for each section
+- Use Obsidian-friendly Markdown (no HTML)
+- Keep it scannable — favor short bullet points over paragraphs
+- Add a YAML frontmatter block at the top:
+
+---
+title: "Daily Brief — [YYYY-MM-DD]"
+date: [YYYY-MM-DD]
+tags: [daily-brief]
+type: daily-note
+---</pre>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 12 — WEEKLY REVIEW
+═══════════════════════════════════════ -->
+<div class="slide slide--cream" id="s12">
+  <div class="prefix"><span class="n">10.</span><span class="t">Weekly Review</span></div>
+  <h2 class="h1">Close the Loop.</h2>
+  <div class="grid2 mt2">
+    <div>
+      <div class="gi-num">01.</div>
+      <div class="gi-title">Completed Tasks</div>
+      <div class="gi-desc">Everything finished this week, grouped by project</div>
+    </div>
+    <div>
+      <div class="gi-num">02.</div>
+      <div class="gi-title">Wins This Week</div>
+      <div class="gi-desc">3–5 meaningful accomplishments and why they matter</div>
+    </div>
+    <div>
+      <div class="gi-num">03.</div>
+      <div class="gi-title">Areas for Improvement</div>
+      <div class="gi-desc">Honest analysis of what slowed you down and why</div>
+    </div>
+    <div>
+      <div class="gi-num">04.</div>
+      <div class="gi-title">Lessons Learned</div>
+      <div class="gi-desc">Reusable insights tagged by category</div>
+    </div>
+    <div>
+      <div class="gi-num">05.</div>
+      <div class="gi-title">Open Tasks Carried Forward</div>
+      <div class="gi-desc">What moves to next week and recommended action</div>
+    </div>
+    <div>
+      <div class="gi-num">06.</div>
+      <div class="gi-title">Next Week's Priorities</div>
+      <div class="gi-desc">Top 5 priorities with a one-sentence rationale each</div>
+    </div>
+  </div>
+  <p class="maxim mt3">Reflection is the engine of improvement.</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 13 — WEEKLY REVIEW PROMPT
+═══════════════════════════════════════ -->
+<div class="slide slide--cream prompt-slide" id="s13">
+  <div class="prompt-meta">
+    <div class="prefix" style="margin-bottom:0.25rem"><span class="n">11.</span><span class="t">Weekly Review Prompt</span></div>
+    <p class="prompt-sub">Copy and paste into Claude Cowork — set a recurring Friday 5 PM schedule</p>
+  </div>
+  <pre class="prompt-block">Generate a Weekly Review for my Obsidian vault. Save it as a new Markdown file named `review-[YYYY-MM-DD].md` (using today's date) inside the `Claude/weekly-review` folder of my Obsidian vault.
+
+## 1. Completed Tasks This Week
+Read all files in the `TaskNotes` folder of my Obsidian vault and extract any tasks that were completed this week (lines with `- [x]`). Then:
+- Group by project or context (Studio Kairos, Clear Lake Tutors, Personal, etc.)
+- For each group, list the completed tasks
+- Add a task count per group and a total count at the end
+Format as grouped lists under H3 subheadings per project/context.
+
+## 2. Wins This Week
+Based on the completed tasks above, identify 3–5 notable wins — things that moved the needle, unblocked something important, or represent meaningful progress. For each win:
+- Describe what was accomplished in one sentence
+- Explain why it matters — what it unlocked, what goal it advances, or what problem it solved
+- Suggest momentum actions — one small next step to keep the progress going
+Format as a numbered list.
+
+## 3. Areas for Improvement
+Analyze the week honestly and identify 3–5 areas for improvement. Consider:
+- Tasks that were carried over from previous weeks and still aren't done — why are they stuck?
+- Tasks that took longer than expected — what caused the drag?
+- Gaps in focus — was time spent on the right priorities, or did low-value work eat the week?
+- Patterns — recurring blockers, procrastination triggers, or workflow friction worth addressing
+For each area:
+- Name the issue clearly
+- Identify the root cause (not just the symptom)
+- Suggest a specific, actionable change for next week
+Format as a numbered list.
+
+## 4. Lessons Learned
+Capture 3–5 reusable insights from this week — things worth remembering beyond just this review. For each lesson:
+- State the lesson as a clear, memorable one-liner (something you could re-read in 6 months and immediately understand)
+- Add context — what happened that surfaced this lesson
+- Tag it with a category: #technical, #business, #teaching, or #productivity
+Format as a numbered list.
+
+## 5. Open Tasks Carried Forward
+List all remaining incomplete tasks (lines with `- [ ]`) carrying into next week:
+- Group by project or context
+- Flag any that are overdue or have been open for more than two weeks
+- For flagged items, recommend whether to prioritize, delegate, renegotiate the deadline, or drop
+Format as grouped lists under H3 subheadings per project/context.
+
+## 6. Next Week's Priorities
+Based on everything above, recommend the top 5 priorities for next week, considering:
+- Unfinished high-priority work carried forward
+- Momentum from this week's wins worth continuing
+- Improvement areas that need deliberate attention
+- Any lessons learned that suggest a change in approach
+For each priority, include a one-sentence rationale. Format as a numbered list.
+
+---
+General formatting rules:
+- Use H2 (`##`) for each of the six main sections
+- Use Obsidian-friendly Markdown (no HTML)
+- Keep it scannable — favor short bullet points over paragraphs
+- Be honest and constructive in the improvement section — direct but not harsh
+- Add a YAML frontmatter block at the top:
+
+---
+title: "Weekly Review — [YYYY-MM-DD]"
+date: [YYYY-MM-DD]
+tags: [weekly-review]
+type: weekly-note
+---</pre>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 14 — CONTACT / CLOSING
+═══════════════════════════════════════ -->
+<div class="slide slide--dark" id="s14">
+  <h1 class="display">Let's Build<br>Together.</h1>
+  <div class="contact-links" style="display:flex;flex-direction:column;gap:0.55rem;margin-top:1.8rem;">
+    <p class="body" style="color:rgba(255,255,255,0.85)">clearlaketutor.com</p>
+    <p class="body" style="color:rgba(255,255,255,0.85)">clearlaketutoring@gmail.com</p>
+    <p class="body" style="color:rgba(255,255,255,0.85)">linkedin.com/in/mason-tang-87696b65</p>
+    <p class="body" style="color:var(--secondary)">Presentation URL — TBD</p>
+  </div>
+  <p class="maxim" style="margin-top:2.5rem;font-size:clamp(0.8rem,1.1vw,1.1rem)">
+    GO SLOW. STAY CURIOUS. BUILD THINGS THAT MATTER.
+  </p>
+  <div class="abs-footer">Houston AI Club &nbsp;·&nbsp; 2026</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════ -->
+<nav id="nav">
+  <button class="nav-btn" id="prev">&#8592;</button>
+  <span id="counter">1 / 14</span>
+  <button class="nav-btn" id="next">&#8594;</button>
+</nav>
+
+<script>
+  let cur = 0;
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const total = slides.length;
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(n, total - 1));
+    slides[cur].classList.add('active');
+    counter.textContent = (cur + 1) + ' / ' + total;
+    document.getElementById('prev').disabled = cur === 0;
+    document.getElementById('next').disabled = cur === total - 1;
+  }
+
+  document.getElementById('prev').addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('next').addEventListener('click', () => goTo(cur + 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(cur + 1); }
+    if (e.key === 'ArrowLeft')                   { e.preventDefault(); goTo(cur - 1); }
+  });
+
+  goTo(0);
+</script>
+</body>
+</html>
