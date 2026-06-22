@@ -842,15 +842,11 @@ General formatting rules:
       <h2 class="h1">Start Every Day<br />with Clarity.</h2>
       <div class="flist mt2">
         <p class="fitem">
-          <b>01. Today's Weather</b> — current conditions so you can plan your
-          day
-        </p>
-        <p class="fitem">
-          <b>02. Task Review</b> — all incomplete tasks for this week, grouped
+          <b>01. Task Review</b> — all incomplete tasks for this week, grouped
           by project
         </p>
         <p class="fitem">
-          <b>03. Today's Focus</b> — AI picks your top 3–5 tasks and builds a
+          <b>02. Today's Focus</b> — AI picks your top 3–5 tasks and builds a
           time-blocked schedule
         </p>
         <ul style="list-style: disc; padding-left: 2.4rem; margin-top: 0.3rem; display: flex; flex-direction: column; gap: 0.3rem;">
@@ -879,35 +875,37 @@ General formatting rules:
 Generate a Daily Brief for my Obsidian vault. Save it as a new Markdown file named `daily-[YYYY-MM-DD].md` (using today's date) inside the `Claude/daily` folder of my Obsidian vault. The brief should have three sections:
 
 ## 1. Weekly Task Review
+
 Read all files in the `TaskNotes` folder of my Obsidian vault and extract any incomplete tasks (lines with `- [ ]`). Then:
+
 - Group tasks by project or context (Studio Kairos, Clear Lake Tutors, Personal, etc.)
 - Prioritize each task as 🔴 High, 🟡 Medium, or 🟢 Low based on deadlines and importance
 - Estimate time for each task (e.g., ~30 min, ~2 hrs)
-- For any complex or multi-step tasks, add a brief recommended approach (2–3 sentences on how to tackle it)
-Format as grouped lists under H3 subheadings per project/context.
-- Only include tasks for this week — not future weeks
+- For any complex or multi-step tasks, add a brief recommended approach (2–3 sentences on how to tackle it) Format as grouped lists under H3 subheadings per project/context.
+- Only put tasks for this week and Not for future weeks
 
 ## 2. Today's Focus
+
 Based on the weekly task review above, build a focused daily plan for today:
+
 - Pick the top 3–5 tasks I should realistically tackle today, considering priority and time estimates
 - Arrange them into a suggested schedule with time blocks (morning, midday, afternoon, evening)
 - Flag any tasks that are blocked or depend on someone else
-- If the day looks overloaded, recommend what to defer and why
-Format as a numbered list with time blocks and brief reasoning for each pick.
-
----
-General formatting rules:
-- Use H2 (`##`) for each section
+- If the day looks overloaded, recommend what to defer and why Format as a numbered list with time blocks and brief reasoning for each pick. General formatting rules:
+- Use H2 (`##`) for each of the three main sections
 - Use Obsidian-friendly Markdown (no HTML)
 - Keep it scannable — favor short bullet points over paragraphs
-- Add a YAML frontmatter block at the top:
+- Add a YAML frontmatter block at the top: yaml
 
+```yaml
 ---
 title: "Daily Brief — [YYYY-MM-DD]"
 date: [YYYY-MM-DD]
 tags: [daily-brief]
 type: daily-note
----</pre
+---
+```
+</pre
       >
     </div>
 
